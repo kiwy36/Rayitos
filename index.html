@@ -5,12 +5,20 @@
   <title>Juego de Memoria</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="preload.css">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/jvkzfpt8/kiwi.png" />
 </head>
 <body>
   <h1 class="title">Memoria Catodica</h1>
-
+  <!-- Pantalla de carga -->
+  <div id="pantalla-carga">
+    <div class="spinner-container">
+      <img src="./img/016.jpg" alt="Cargando" class="loading-image">
+      <div class="spinner"></div>
+    </div>
+    <p class="texto-carga">Cargando imágenes...</p>
+  </div>
   <!-- Pantalla de selección de dificultad -->
   <div id="seleccion-dificultad">
     <p>Elegí la dificultad:</p>
@@ -26,7 +34,7 @@
 
   <button id="reiniciar" style="display:none;">Volver a jugar</button>
 
-
-  <script src="./scriptDos.js"></script>
+  <script src="preload.js"></script>
+  <script src="juego.js"></script>
 </body>
 </html>
