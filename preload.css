@@ -1,63 +1,62 @@
-/* === Pantalla de carga === */
 #pantalla-carga {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #0051A2; /* Azul fuerte */
+  background-color: #0051A2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   color: white;
-  font-size: 18px;
   font-family: 'Fredoka One', sans-serif;
 }
 
-/* Contenedor que agrupa imagen + spinner */
 .spinner-container {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   margin-bottom: 20px;
 }
 
-/* Imagen central redonda */
-.loading-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 2;
-  position: relative;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Spinner que gira alrededor de la imagen */
+/* Spinner: gira como borde exterior */
 .spinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 120px;
-  border: 8px solid #FFCB05;      /* Amarillo vivo */
-  border-top: 8px solid #E32224;  /* Rojo intenso */
+  width: 180px;
+  height: 180px;
+  border: 15px solid #FFCB05;
+  border-top: 12px solid #E32224;
   border-radius: 50%;
   animation: girar 1s linear infinite;
-  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Animación de giro */
+/* Imagen centrada sobre el spinner */
+.loading-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  animation: anti-giro 1s linear infinite;
+}
 @keyframes girar {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* Texto de carga */
+/* Animación inversa para la imagen (contrarresta el giro del padre) */
+@keyframes anti-giro {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
 .texto-carga {
-  color: white;
   font-size: 20px;
+  color: white;
   text-shadow: 1px 1px 2px black;
 }
