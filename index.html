@@ -19,22 +19,26 @@
         <img src="./img/016.jpg" alt="Cargando" class="loading-image">
       </div>
     </div>
-    <p class="texto-carga">Cargando imágenes...</p>
+    <p class="texto-carga">Cargando Datos...</p>
+    <button id="boton-inicio" style="display: none;">Ya está todo listo, ¡vos dale play!</button>
   </div>
+
   <!-- Pantalla de selección de dificultad -->
-  <div id="seleccion-dificultad">
-    <p>Elegí la dificultad:</p>
-    <button onclick="elegirDificultad(3)">Fácil (3 pares)</button>
-    <button onclick="elegirDificultad(8)">Normal (8 pares)</button>
-    <button onclick="elegirDificultad(16)">Difícil (16 pares)</button>
+  <div id="contenedor-juego" style="display: none;">
+    <div id="seleccion-dificultad">
+      <p>Elegí la dificultad:</p>
+      <button onclick="elegirDificultad(3)">Fácil (3 pares)</button>
+      <button onclick="elegirDificultad(8)">Normal (8 pares)</button>
+      <button onclick="elegirDificultad(16)">Difícil (16 pares)</button>
+    </div>
+
+    <button id="start" style="display:none;">Comenzar juego</button>
+    <p id="tiempo" style="display:none;">Tiempo restante: --</p>
+    <p id="movimientos" style="display:none;">Movimientos restantes: --</p>
+    <div class="game-board" id="tablero"></div>
+
+    <button id="reiniciar" style="display:none;">Volver a jugar</button>
   </div>
-
-  <button id="start" style="display:none;">Comenzar juego</button>
-  <p id="tiempo" style="display:none;">Tiempo restante: --</p>
-  <p id="movimientos" style="display:none;">Movimientos restantes: --</p>
-  <div class="game-board" id="tablero"></div>
-
-  <button id="reiniciar" style="display:none;">Volver a jugar</button>
 
   <script src="preload.js"></script>
   <script src="juego.js"></script>

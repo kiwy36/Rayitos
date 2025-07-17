@@ -4,15 +4,16 @@ const imagenesACargar = [
   './img/008.jpg', './img/009.jpg', './img/010.jpg', './img/011.jpg',
   './img/012.jpg', './img/013.jpg', './img/014.jpg', './img/015.jpg'
 ];
+
 const audios = [
-    './audio/audioUno.mp3',
-    './audio/audioDos.mp3',
-    './audio/audioTres.mp3',
-    './audio/audioCuatro.mp3',
-    './audio/audioCinco.mp3',
-    './audio/audioPunto.mp3',
-    './audio/GameOver.mp3',
-    './audio/win.mp3'
+  './audio/audioUno.mp3',
+  './audio/audioDos.mp3',
+  './audio/audioTres.mp3',
+  './audio/audioCuatro.mp3',
+  './audio/audioCinco.mp3',
+  './audio/audioPunto.mp3',
+  './audio/GameOver.mp3',
+  './audio/win.mp3'
 ];
 
 const precargarImagenes = () => {
@@ -24,9 +25,9 @@ const precargarImagenes = () => {
       img.onerror = resolve;
     });
   });
-
   return Promise.all(promesas);
 };
+
 const precargarAudios = () => {
   const promesas = audios.map((url) => {
     return new Promise((resolve) => {
@@ -36,7 +37,6 @@ const precargarAudios = () => {
       audio.onerror = resolve;
     });
   });
-
   return Promise.all(promesas);
 };
 
@@ -47,9 +47,22 @@ window.addEventListener('load', async () => {
   await Promise.all([
     precargarImagenes(),
     precargarAudios(),
-    esperar(5000) // mostrar la pantalla de carga al menos 5 segundos
+    esperar(5000) // spinner al menos 5 segundos
   ]);
 
-  const pantallaCarga = document.getElementById('pantalla-carga');
-  pantallaCarga.style.display = 'none';
+  const textoCarga = document.querySelector('.texto-carga');
+  const botonInicio = document.getElementById('boton-inicio');
+
+  textoCarga.style.display = 'none';
+  botonInicio.style.display = 'block';
+
+  botonInicio.addEventListener('click', () => {
+    document.getElementById('pantalla-carga').style.display = 'none';
+    document.getElementById('contenedor-juego').style.display = 'block';
+
+    // Delegar el manejo de la música al otro script
+    if (typeof reproducirSiguiente === 'function') {
+      reproducirSiguiente();
+    }
+  });
 });
