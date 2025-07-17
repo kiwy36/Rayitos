@@ -4,6 +4,16 @@ const imagenesACargar = [
   './img/008.jpg', './img/009.jpg', './img/010.jpg', './img/011.jpg',
   './img/012.jpg', './img/013.jpg', './img/014.jpg', './img/015.jpg'
 ];
+const audios = [
+    './audio/audioUno.mp3',
+    './audio/audioDos.mp3',
+    './audio/audioTres.mp3',
+    './audio/audioCuatro.mp3',
+    './audio/audioCinco.mp3',
+    './audio/audioPunto.mp3',
+    './audio/GameOver.mp3',
+    './audio/win.mp3'
+];
 
 const precargarImagenes = () => {
   const promesas = imagenesACargar.map((url) => {
@@ -17,6 +27,18 @@ const precargarImagenes = () => {
 
   return Promise.all(promesas);
 };
+const precargarAudios = () => {
+  const promesas = audios.map((url) => {
+    return new Promise((resolve) => {
+      const audio = new Audio();
+      audio.src = url;
+      audio.oncanplaythrough = resolve;
+      audio.onerror = resolve;
+    });
+  });
+
+  return Promise.all(promesas);
+};
 
 const esperar = (milisegundos) =>
   new Promise((resolve) => setTimeout(resolve, milisegundos));
@@ -24,6 +46,7 @@ const esperar = (milisegundos) =>
 window.addEventListener('load', async () => {
   await Promise.all([
     precargarImagenes(),
+    precargarAudios(),
     esperar(5000) // mostrar la pantalla de carga al menos 5 segundos
   ]);
 
