@@ -17,10 +17,11 @@ h1, p, #tiempo, #movimientos {
 .title{
   font-size: 3rem;
 }
+
 /* BOTONES GENERALES */
 button {
-  padding: 10px 25px;
-  font-size: 18px;
+  padding: 12px 30px;
+  font-size: 20px;
   margin: 15px;
   cursor: pointer;
   border: none;
@@ -39,20 +40,23 @@ button:hover {
   background: linear-gradient(to bottom, #4FC3F7, #0051A2);
 }
 
-/* TABLERO DE CARTAS */
+/* TABLERO DE CARTAS CON FLEXBOX MEJORADO */
 .game-board {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  max-width: 1000px;
-  margin: 0 auto;
+  align-items: center;
+  gap: 15px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 10px;
+  width: 100%;
 }
 
-/* CARTAS */
+/* CARTAS RESPONSIVAS CON FLEXBOX */
 .card {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   background-color: #FFCB05;
   border: 3px solid #E32224;
   display: flex;
@@ -63,6 +67,7 @@ button:hover {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s, box-shadow 0.3s;
+  flex: 0 0 auto;
 }
 
 .card:hover {
@@ -83,13 +88,14 @@ button:hover {
   pointer-events: none;
   filter: drop-shadow(0 0 2px black);
 }
+
 /* ANIMACIÓN GLOSSY DE CARTAS EMPAREJADAS */
 .card.matched {
   position: relative;
   animation: brilloGlossy 1.5s ease-in-out infinite;
   z-index: 1;
   box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.7);
-  border-color: #4FC3F7; /* Celeste claro para destacar */
+  border-color: #4FC3F7;
 }
 
 @keyframes brilloGlossy {
@@ -104,7 +110,6 @@ button:hover {
   }
 }
 
-/* Opcional: Brillo diagonal tipo reflejo */
 .card.matched::before {
   content: '';
   position: absolute;
@@ -132,13 +137,150 @@ button:hover {
   }
 }
 
-/* SECCIÓN DE DIFICULTAD */
-#seleccion-dificultad {
+/* SECCIÓN DE DIFICULTAD - SIEMPRE EN COLUMNA */
+#seleccion-dificultad, #seleccion-dificultad.visible {
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #seleccion-dificultad button {
   margin: 10px;
-  padding: 12px 20px;
-  font-size: 18px;
+  padding: 15px 25px;
+  font-size: 20px;
+  width: 250px;
+  max-width: 80%;
+}
+
+/* ESTILOS PARA SWEETALERT RESPONSIVE */
+.swal2-popup {
+  font-size: 1.6rem !important;
+  max-width: 90% !important;
+  width: auto !important;
+}
+
+.swal2-title {
+  font-size: 2rem !important;
+}
+
+.swal2-content {
+  font-size: 1.8rem !important;
+}
+
+.swal2-confirm {
+  font-size: 1.6rem !important;
+  padding: 10px 24px !important;
+}
+
+/* MEDIA QUERIES MEJORADAS */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .card {
+    width: 120px;
+    height: 120px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+  
+  #seleccion-dificultad button {
+    width: 200px;
+    padding: 12px 20px;
+  }
+  
+  /* Ajustes SweetAlert para tablet */
+  .swal2-popup {
+    font-size: 1.4rem !important;
+  }
+  
+  .swal2-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .swal2-content {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin: 5px 0;
+  }
+  
+  .card {
+    width: 22vw;
+    height: 22vw;
+    min-width: 70px;
+    min-height: 70px;
+    border-radius: 10px;
+  }
+  
+  button {
+    padding: 8px 15px;
+    font-size: 16px;
+    margin: 8px;
+  }
+  
+  #seleccion-dificultad button {
+    width: 180px;
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+  
+  .game-board {
+    gap: 8px;
+  }
+  
+  h1, p, #tiempo, #movimientos {
+    font-size: 1.5rem;
+  }
+  
+  /* Ajustes SweetAlert para mobile */
+  .swal2-popup {
+    font-size: 1.2rem !important;
+    padding: 1.5rem !important;
+  }
+  
+  .swal2-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .swal2-content {
+    font-size: 1.3rem !important;
+  }
+  
+  .swal2-confirm {
+    font-size: 1.3rem !important;
+    padding: 8px 16px !important;
+  }
+}
+
+/* Pantallas muy pequeñas (ej. móviles en horizontal) */
+@media (max-width: 360px) {
+  .card {
+    width: 20vw;
+    height: 20vw;
+    min-width: 60px;
+    min-height: 60px;
+  }
+  
+  #seleccion-dificultad button {
+    width: 160px;
+    font-size: 15px;
+  }
 }

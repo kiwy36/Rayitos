@@ -174,10 +174,21 @@ function mostrarFinal(resultado) {
     icon: resultado === "win" ? "success" : "error",
     confirmButtonText: "OK"
   }).then(() => {
+    if (!efectoWin.paused) {
+      efectoWin.pause();
+      efectoWin.currentTime = 0;
+    }
+    if (!efectoLose.paused) {
+      efectoLose.pause();
+      efectoLose.currentTime = 0;
+    }
+
+    // Reanudar música principal
     if (typeof reanudarMusica === 'function') {
       reanudarMusica();
     }
   });
+
 }
 
 function reiniciarJuego() {
@@ -191,6 +202,29 @@ function reiniciarJuego() {
   $tiempo.textContent = '';
   $movimientos.textContent = '';
 
-  document.getElementById('seleccion-dificultad').style.display = 'block';
+  // Restablecer el menú de dificultad
+  const seleccionDificultad = document.getElementById('seleccion-dificultad');
+  seleccionDificultad.style.display = 'flex'; // Cambiado a flex para mantener el layout
+  seleccionDificultad.style.flexDirection = 'column';
+  seleccionDificultad.style.alignItems = 'center';
+  
   document.getElementById('tablero').innerHTML = '';
+  
+  // Resetear variables del juego
+  cards = [];
+  imagenes = [];
+  firstCard = null;
+  lockBoard = false;
+  matchedPairs = 0;
+  cantidadPares = 0;
+  tiempoRestante = 0;
+  movimientosRestantes = 0;
 }
+
+// Asegurar que el menú se muestre correctamente al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+  const seleccionDificultad = document.getElementById('seleccion-dificultad');
+  seleccionDificultad.style.display = 'flex';
+  seleccionDificultad.style.flexDirection = 'column';
+  seleccionDificultad.style.alignItems = 'center';
+});
