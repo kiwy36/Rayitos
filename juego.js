@@ -4,6 +4,10 @@ const todasLasImagenes = [
   './img/008.jpg', './img/009.jpg', './img/010.jpg', './img/011.jpg',
   './img/012.jpg', './img/013.jpg', './img/014.jpg', './img/015.jpg'
 ];
+// Precargar efectos especiales
+const efectoPunto = new Audio('./audio/audioPunto.mp3');
+const efectoWin = new Audio('./audio/win.mp3');
+const efectoLose = new Audio('./audio/GameOver.mp3');
 
 let cards = [];
 let imagenes = [];
@@ -44,7 +48,6 @@ $start.addEventListener('click', iniciarJuego);
 $reiniciar.addEventListener('click', reiniciarJuego);
 
 function iniciarJuego() {
-  
   document.getElementById('start').style.display = 'none';
   const tablero = document.getElementById('tablero');
   tablero.innerHTML = '';
@@ -116,7 +119,8 @@ function manejarClick(card) {
       // ✅ Agregamos clase para animación de brillo
       firstCard.classList.add('matched');
       segunda.classList.add('matched');
-      
+      efectoPunto.currentTime = 0;
+      efectoPunto.play();
       firstCard = null;
       matchedPairs++;
 
@@ -152,20 +156,28 @@ function mostrarFinal(resultado) {
   $reiniciar.style.display = 'inline-block';
 
   const dificultad = dificultades[cantidadPares].nombre;
-
-  if (resultado === "win") {
-    Swal.fire({
-      title: "¡Ganaste! 🎉",
-      text: `Dificultad: ${dificultad}\nTiempo restante: ${tiempoRestante}s\nMovimientos restantes: ${movimientosRestantes}`,
-      icon: "success"
-    });
-  } else {
-    Swal.fire({
-      title: "Perdiste 😢",
-      text: `Resolvió ${matchedPairs} de ${imagenes.length} pares.`,
-      icon: "error"
-    });
+  if (typeof pausarMusica === 'function') {
+    pausarMusica();
   }
+
+  // Reproducir audio correspondiente
+  if (resultado === "win") {
+    efectoWin.play();
+  } else {
+    efectoLose.play();
+  }
+  Swal.fire({
+    title: resultado === "win" ? "¡Ganaste! 🎉" : "Perdiste 😢",
+    text: resultado === "win"
+      ? `Dificultad: ${dificultad}\nTiempo restante: ${tiempoRestante}s\nMovimientos restantes: ${movimientosRestantes}`
+      : `Resolvió ${matchedPairs} de ${imagenes.length} pares.`,
+    icon: resultado === "win" ? "success" : "error",
+    confirmButtonText: "OK"
+  }).then(() => {
+    if (typeof reanudarMusica === 'function') {
+      reanudarMusica();
+    }
+  });
 }
 
 function reiniciarJuego() {
