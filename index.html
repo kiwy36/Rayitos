@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="preload.css">
+  <link rel="stylesheet" href="galeria.css">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/jvkzfpt8/kiwi.png" />
 </head>
@@ -27,6 +28,7 @@
       <button onclick="elegirDificultad(3)">Fácil (3 pares)</button>
       <button onclick="elegirDificultad(8)">Normal (8 pares)</button>
       <button onclick="elegirDificultad(16)">Difícil (16 pares)</button>
+      <button id="boton-galeria">Álbum de Imágenes</button>
     </div>
 
     <button id="start" style="display:none;">Comenzar juego</button>
@@ -40,5 +42,14 @@
   <script src="preload.js"></script>
   <script src="juego.js"></script>
   <script src="manejoAudios.js"></script>
+  <script src="galeria.js"></script>
+  <script>
+    // Añadir evento al botón de galería
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('boton-galeria').addEventListener('click', () => {
+        galeria.mostrarGaleria();
+      });
+    });
+  </script>
 </body>
 </html>
