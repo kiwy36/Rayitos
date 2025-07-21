@@ -2,7 +2,8 @@ const todasLasImagenes = [
   './img/000.jpg', './img/001.jpg', './img/002.jpg', './img/003.jpg',
   './img/004.jpg', './img/005.jpg', './img/006.jpg', './img/007.jpg',
   './img/008.jpg', './img/009.jpg', './img/010.jpg', './img/011.jpg',
-  './img/012.jpg', './img/013.jpg', './img/014.jpg', './img/015.jpg'
+  './img/012.jpg', './img/013.jpg', './img/014.jpg', './img/015.jpg',
+  './img/016.jpg', './img/017.jpg', './img/018.jpg', './img/018.png',
 ];
 // Precargar efectos especiales
 const efectoPunto = new Audio('./audio/audioPunto.mp3');
@@ -34,7 +35,10 @@ const dificultades = {
 function elegirDificultad(pares) {
   $start.style.display = 'inline-block';
   cantidadPares = pares;
-  imagenes = todasLasImagenes.slice(0, pares);
+
+  // Elegir aleatoriamente "pares" imágenes distintas
+  const imagenesMezcladas = [...todasLasImagenes].sort(() => Math.random() - 0.5);
+  imagenes = imagenesMezcladas.slice(0, pares);
 
   const { tiempo, movimientos } = dificultades[pares];
   tiempoRestante = tiempo;
@@ -43,6 +47,7 @@ function elegirDificultad(pares) {
   document.getElementById('seleccion-dificultad').style.display = 'none';
   $start.style.display = 'inline-block';
 }
+
 
 $start.addEventListener('click', iniciarJuego);
 $reiniciar.addEventListener('click', reiniciarJuego);
